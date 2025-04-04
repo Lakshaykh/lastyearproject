@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Prediction System</title>
+    <link rel="stylesheet" href="static\styles.css">
+    <link rel="icon" href="favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+            <h1>Placement Prediction System</h1>
+        </header>
+        <button id="darkModeToggle" class="btn dark-toggle">🌙</button>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('add_details') }}">Add Student Details</a></li>
+                <li><a href="{{ url_for('knownchances') }}">Check Placement Chances</a></li>
+                <li><a href="{{ url_for('display') }}">Display Data</a></li>
+
+            </ul>
+        </nav>
+
+        <section id="upload-section" class="section">
+            <h2>Upload Your Data</h2>
+            <div id="dropZone" class="drop-zone">
+                <p id="dropZoneText">Drag and drop your CSV file here or</p>
+                <label for="fileInput" class="upload-label">Choose File</label>
+                <input type="file" id="fileInput" accept=".csv" />
+                <p id="fileNameDisplay" style="color: green; font-weight: bold;"></p>
+            </div>
+            <button type="button" class="btnnn" onclick="uploadFile()">Submit</button>
+        </section>
+
+        <section id="data-section" class="section" style="display: none;">
+            <h2>Uploaded Data</h2>
+            <div class="table-container">
+                <input type="text" id="searchInput" placeholder="Search by Student_ID" oninput="searchData()" style="width: 200px;">
+                <table id="dataTable"></table>
+            </div>
+        </section>
+
+        <section id="dashboard" class="section" style="display: none;">
+            <h2>Dashboard</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>Total Records</h3>
+                    <p id="totalRecords">0</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Average %</h3>
+                    <p id="averagePercentage">0%</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Placement Chances</h3>
+                    <div class="progress" id="placementChance"></div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="chart"></canvas>
+                
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <h2>About the System</h2>
+            <p>This system predicts student placement chances based on historical data. Upload your CSV file to generate reports.</p>
+        </section>
+
+        <section id="student-form" class="section" style="display: none;">
+            <h2>Add Your Details</h2>
+            <form id="studentForm">
+                <label for="studentName">Name:</label>
+                <input type="text" id="studentName" placeholder="Enter your name" required />
+                
+                <label for="studentID">Student ID:</label>
+                <input type="text" id="studentID" placeholder="Enter your ID" required />
+                
+                <label for="academicPercentage">Academic Percentage:</label>
+                <input type="number" id="academicPercentage" placeholder="Enter your percentage" required />
+                
+                <label for="skills">Skills:</label>
+                <input type="text" id="skills" placeholder="Enter your skills (comma-separated)" required />
+                
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </section>
+        
+        <section id="company-requirements" class="section" style="display: none;">
+            <h2>Admin: Add Company Requirements</h2>
+            <form id="companyForm">
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" placeholder="Enter company name" required />
+        
+                <label for="requiredSkills">Required Skills:</label>
+                <input type="text" id="requiredSkills" placeholder="Enter skills (comma-separated)" required />
+        
+                <label for="eligibilityPercentage">Eligibility Percentage:</label>
+                <input type="number" id="eligibilityPercentage" placeholder="Enter percentage requirement" required />
+        
+                <button type="submit" class="btn">Add Requirement</button>
+            </form>
+        </section>
+        <footer class="footer">
+            <p>&copy; 2025 Placement Prediction System | Developed by Team</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script></body>
+</html>

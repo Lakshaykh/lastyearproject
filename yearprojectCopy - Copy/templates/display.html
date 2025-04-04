@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Prediction System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"></head>
+<body>
+    <div class="container">
+        <header>
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+            <h1>Placement Prediction System</h1>
+        </header>
+        <button id="darkModeToggle" class="btn dark-toggle">🌙</button>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('add_details') }}">Add Student Details</a></li>
+                <li><a href="{{ url_for('knownchances') }}">Check Placement Chances</a></li>
+                <li><a href="{{ url_for('display') }}">Display Data</a></li>
+            </ul>
+        </nav>
+        <br>
+        <centre>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQg2lHmFC53NTd2RasxgbGy43BGJzm8D4LcwTF2ELRk2m4q1R2sxeYNgJzaoWWun41xIh3E24kBOCiC/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"style=" height:450px; width:1480px;">
+            </iframe>
+            <button id="downloadCSV" class="btn">Download CSV</button>
+        </centre>
+        
+    </div>
+   
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <script>
+            document.getElementById('downloadCSV').addEventListener('click', function() {
+                // Replace with your Google Sheets CSV export URL
+                const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQg2lHmFC53NTd2RasxgbGy43BGJzm8D4LcwTF2ELRk2m4q1R2sxeYNgJzaoWWun41xIh3E24kBOCiC/pub?gid=0&single=true&output=csv";
+                
+                const link = document.createElement('a');
+                link.href = csvUrl;
+                link.download = 'placement_data.csv'; 
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        </script>
+</body>
+</html>

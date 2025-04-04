@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Prediction System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+            <h1>Placement Prediction System</h1>
+        </header>
+        <button id="darkModeToggle" class="btn dark-toggle">🌙</button>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('add_details') }}">Add Student Details</a></li>
+                <li><a href="{{ url_for('knownchances') }}">Check Placement Chances</a></li>
+                <li><a href="{{ url_for('display') }}">Display Data</a></li>
+            </ul>
+        </nav>
+        <br>
+            <form id="addStudentForm"   method="POST" action="https://formspree.io/f/maneplwn">
+                <label for="student_id">Student ID:</label>
+                <input type="text" id="student_id" name="student_ID" required>
+
+                <label for="tenth_percentage">10th Percentage:</label>
+                <input type="number" id="tenth_percentage" name="Tenth_Percentage">
+
+                <label for="twelfth_percentage">12th Percentage:</label>
+                <input type="number" id="twelfth_percentage" name="Twelfth_Percentage">
+
+                <label for="undergraduate_gpa">Undergraduate GPA:</label>
+                <input type="number" id="undergraduate_gpa" name="Undergraduate_GPA">
+
+                <label for="backlogs">Number of Backlogs:</label>
+                <input type="number" id="backlogs" name="Number_of_Backlogs">
+
+                <label for="certifications">Certifications Completed:</label>
+                <input type="text" id="certifications" name="Certifications_Completed">
+
+                <label for="internship_months">Internship Experience (Months):</label>
+                <input type="number" id="internship_months" name="Internship_Experience_Months">
+
+                <label for="technical_skills">Technical Skills Count:</label>
+                <input type="number" id="technical_skills" name="Technical_Skills_Count">
+
+                <label for="projects_completed">Projects Completed:</label>
+                <input type="number" id="projects_completed" name="Projects_Completed">
+
+                <label for="soft_skills">Soft Skills Rating:</label>
+                <input type="number" id="soft_skills" name="Soft_Skills_Rating">
+
+                <label for="aptitude_score">Aptitude Test Score:</label>
+                <input type="number" id="aptitude_score" name="Aptitude_Test_Score">
+
+                <label for="mock_interview">Mock Interview Score:</label>
+                <input type="number" id="mock_interview" name="Mock_Interview_Score">
+
+                <label for="hackathon">Hackathon Participation:</label>
+                <input type="text" id="hackathon" name="Hackathon_Participation">
+
+                <label for="volunteering">Volunteering Experience:</label>
+                <input type="text" id="volunteering" name="Volunteering_Experience">
+
+                <label for="extracurricular">Extracurricular Rating:</label>
+                <input type="number" id="extracurricular" name="Extracurricular_Rating">
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="Age">
+
+                <label for="gender">Gender:</label>
+                <input type="text" id="gender" name="Gender">
+
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="Location">
+
+                <label for="placement_training">Placement Training Participation (Yes/No):</label>
+                <input type="text" id="placement_training" name="Placement_Training_Participation">
+
+                <label for="interview_rates">Interview Call Rates:</label>
+                <input type="number" id="interview_rates" name="Interview_Call_Rates">
+
+                <label for="preferred_role">Preferred Role:</label>
+                <input type="text" id="preferred_role" name="Preferred_Role">
+
+                <label for="previous_offers">Previous Internship Offers:</label>
+                <input type="text" id="previous_offers" name="Previous_Internship_Offers">
+
+                <label for="desired_salary">Desired Salary Range:</label>
+                <input type="text" id="desired_salary" name="Desired_Salary_Range">
+
+                <label for="placement_offer">Placement Offer (Yes/No):</label>
+                <input type="text" id="placement_offer" name="Placement_Offer">
+
+                <label for="specialization">Specialization Field:</label>
+                <input type="text" id="specialization" name="Specialization_Field">
+
+                <label for="semester_trend">Semester Trend:</label>
+                <input type="text" id="semester_trend" name="Semester_Trend">
+
+                <label for="coding_competitions">Coding Competitions Participation:</label>
+                <input type="text" id="coding_competitions" name="Coding_Competitions_Participation">
+
+                <label for="tech_stack">Tech Stack Expertise:</label>
+                <input type="text" id="tech_stack" name="Tech_Stack_Expertise">
+
+                <label for="github_activity">GitHub Activity:</label>
+                <input type="text" id="github_activity" name="GitHub_Activity">
+
+                <label for="leadership_skills">Leadership Skills Rating:</label>
+                <input type="number" id="leadership_skills" name="Leadership_Skills_Rating">
+
+                <label for="emotional_intelligence">Emotional Intelligence Score:</label>
+                <input type="number" id="emotional_intelligence" name="Emotional_Intelligence_Score">
+
+                <label for="time_management">Time Management Skills:</label>
+                <input type="number" id="time_management" name="Time_Management_Skills">
+
+                <label for="resume_quality">Resume Quality Score:</label>
+                <input type="number" id="resume_quality" name="Resume_Quality_Score">
+
+                <label for="alumni_engagement">Alumni Network Engagement:</label>
+                <input type="text" id="alumni_engagement" name="Alumni_Network_Engagement">
+
+                <label for="languages">Languages Known:</label>
+                <input type="text" id="languages" name="Languages_Known">
+
+                <label for="disability_status">Disability Status:</label>
+                <input type="text" id="disability_status" name="Disability_Status">
+
+                <!-- <label for="fathers_occupation">Father's Occupation:</label>
+                <input type="text" id="fathers_occupation" name="Fathers_Occupation"> -->
+
+                <button type="submit" name="submit">Submit</button>
+            </form>
+    </div>
+    <script>
+      const flaskURL = "http://127.0.0.1:5000/add_student"; // Change API endpoint
+
+const form = document.getElementById("addStudentForm");
+const submitButton = form.querySelector('button[type="submit"]');
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault(); 
+
+    let formData = new FormData(this);
+    let data = {};
+
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+
+    submitButton.textContent = 'Uploading...';
+    submitButton.disabled = true;
+
+    try {
+        let response = await fetch(flaskURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        let result = await response.json();
+
+        if (response.ok) {
+            alert("Submitted Successfully!");
+            form.reset();
+        } else {
+            alert("Submission failed. " + result.error);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Submission failed! " + error);
+    } finally {
+        submitButton.textContent = 'Submit';
+        submitButton.disabled = false;
+    }
+});
+    </script>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    
+</body> 
+</html>
